@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: app
+  name: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: app
+    spec:
+      containers:
+      - image: hosnahoseini/hw2cc:2.1
+        imagePullPolicy: Never
+        name: app
+        resources: {}
+        ports:
+          - containerPort: 65432
+        env:
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: redis-secret
+        volumeMounts:
+          - mountPath: /app/config.ini
+            subPath: config.ini
+            name: config-map
+            readOnly: true
+        # livenessProbe:
+        #   httpGet:
+        #     port: 65432
+        #     path: /healthz
+      volumes:
+        - name: config-map
+          configMap:
+            name: app-config
+status: {}

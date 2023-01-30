@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: netutils-deployment
+  name: netutils-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netutils-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: netutils-deployment
+    spec:
+      containers:
+      - image: hosnahoseini/hw2cc:1.0
+        imagePullPolicy: Never
+        name: hw2cc
+        command: ["/bin/sleep"]
+        args: ["infinity"]
+        resources: {}
+        livenessProbe:
+            httpGet:
+              path: /healthz
+              port: liveness-port
+            failureThreshold: 1
+            timeoutSeconds: 5
+            periodSeconds: 60
+status: {}

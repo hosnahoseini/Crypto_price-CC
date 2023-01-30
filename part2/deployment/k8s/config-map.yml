@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  config.ini: |-
+    [DEFAULT]
+    REDIS_HOST : redis-service
+    REDIS_PORT : 6379
+    REDIS_PASSWORD : eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    PROJ_PORT : 65432
+    EXP_TIME : 60
+    CRYPTO_NAME : USDT
+    API_KEY : DE67FCE5-6C27-48F4-8B05-AD25AE6A1D55

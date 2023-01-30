@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  cache:
+    container_name: redis-cache
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data
+    networks:
+      - app-tier
+
+  web:
+    container_name: api
+    build: .
+    ports:
+      - 8008:8000
+    depends_on:
+      - cache
+    links:
+      - cache
+    environment:
+      REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    networks:
+      - app-tier
+
+
+volumes:
+  cache:
+    driver: local
+
+networks:
+  app-tier:
+    driver: bridge

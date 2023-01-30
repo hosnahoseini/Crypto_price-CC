@@ -1,0 +1,6 @@
+fastAPI
+pycoingecko
+redis
+uvicorn
+coinapi.rest.v1
+requests
