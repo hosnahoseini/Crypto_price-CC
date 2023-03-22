@@ -1,4 +1,4 @@
-# Crypto price 🪙
+# Crypto price 💰
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
